@@ -35,7 +35,7 @@ export default function ReviewSummary({ result }) {
               {result.language?.toUpperCase()}
             </span>
             <span style={{ fontSize: '0.65rem', color: 'rgba(205,214,244,0.4)', fontWeight: '600', alignSelf: 'center' }}>
-              {result.metrics?.code_lines} lines • {result.total_issues} issues
+              {result.metrics?.code_lines} lines • {result.metrics?.char_count} chars • ~{result.metrics?.estimated_tokens} tokens
             </span>
           </div>
 
