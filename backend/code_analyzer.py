@@ -38,5 +38,7 @@ def get_code_metrics(code: str) -> dict:
         "comment_lines": len(comment_lines),
         "avg_line_length": round(sum(len(l) for l in non_empty) / max(len(non_empty), 1)) if non_empty else 0,
         "max_line_length": max((len(l) for l in lines), default=0),
+        "char_count": len(code),
+        "estimated_tokens": round(len(code) / 4),
         "has_comments": len(comment_lines) > 0
     }
