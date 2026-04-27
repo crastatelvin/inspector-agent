@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 const LANG_COLORS = {
   python: '#3776ab', javascript: '#f7df1e', typescript: '#3178c6',
   java: '#ed8b00', cpp: '#00599c', go: '#00acd7', rust: '#ce422b',

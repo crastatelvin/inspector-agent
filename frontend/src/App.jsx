@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 import './styles/globals.css';
 import MatrixRain from './components/MatrixRain';
 import ReviewPage from './pages/ReviewPage';

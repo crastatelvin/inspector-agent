@@ -1,7 +1,7 @@
 # ============================================
 # Project: INSPECTOR — AI Code Review Agent
 # Author: Telvin Crasta
-# License: CC BY-NC 4.0
+# License: MIT
 # ============================================
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect

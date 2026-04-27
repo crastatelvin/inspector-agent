@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 export default function IssueFilter({ active, onChange }) {
   const filters = [
     { id: 'all', label: 'ALL', color: '#cdd6f4' },

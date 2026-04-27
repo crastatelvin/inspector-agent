@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Terminal, AlertCircle } from 'lucide-react';
 import CodeEditor from '../components/CodeEditor';
@@ -223,7 +223,7 @@ export default function ReviewPage() {
         color: 'rgba(205,214,244,0.15)', fontSize: '0.6rem', fontWeight: '700',
         borderTop: '1px solid rgba(205,214,244,0.04)', background: 'rgba(0,0,0,0.2)',
         letterSpacing: '1px' }}>
-        INSPECTOR v1.0 • AI-DRIVEN CODE AUDIT • BUILT BY TELVIN CRASTA • CC BY-NC 4.0
+        INSPECTOR v1.0 • AI-DRIVEN CODE AUDIT • BUILT BY TELVIN CRASTA • MIT
       </footer>
     </div>
   );

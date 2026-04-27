@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 import { motion } from 'framer-motion';
 
 const GRADE_COLORS = { A: '#39ff14', B: '#0af', C: '#ffcc00', D: '#ff6b00', F: '#ff2d55' };

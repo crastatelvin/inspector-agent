@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 import { motion } from 'framer-motion';
 
 const SEV_CONFIG = {

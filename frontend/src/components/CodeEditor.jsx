@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 import Editor from '@monaco-editor/react';
 import ScanBeam from './ScanBeam';
 

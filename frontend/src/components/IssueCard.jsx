@@ -1,4 +1,4 @@
-// Author: Telvin Crasta | CC BY-NC 4.0
+// Author: Telvin Crasta | MIT
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shield, Zap, Sparkles, Layout, Lightbulb, ChevronDown, ChevronUp, Copy, Check } from 'lucide-react';
