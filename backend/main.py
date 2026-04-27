@@ -47,7 +47,12 @@ async def websocket_endpoint(websocket: WebSocket, client_id: str):
 
 @app.get("/")
 def root():
-    return {"status": "INSPECTOR ONLINE", "author": "Telvin Crasta", "version": "1.0"}
+    return {
+        "status": "INSPECTOR ONLINE",
+        "author": "Telvin Crasta",
+        "version": "1.0",
+        "supported_languages": list(LANGUAGE_PATTERNS.keys())
+    }
 
 @app.post("/review/{client_id}")
 async def review(client_id: str, body: dict):
