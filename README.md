@@ -34,7 +34,7 @@
 3. Start the dev server: `npm run dev`.
 
 ## 📄 License
-Created by **Telvin Crasta**. Licensed under **CC BY-NC 4.0**.
+Created by **Telvin Crasta**. Licensed under **MIT**.
 
 ---
 *Every vulnerability found. Every fix provided. Every line reviewed.*
