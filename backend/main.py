@@ -10,7 +10,7 @@ from fastapi.responses import JSONResponse
 import json
 import uuid
 
-from code_analyzer import detect_language, get_code_metrics
+from code_analyzer import detect_language, get_code_metrics, LANGUAGE_PATTERNS
 from review_agent import review_code
 
 app = FastAPI(title="INSPECTOR — AI Code Review Agent")
