@@ -24,6 +24,28 @@ export default function CodeEditor({ code, onChange, scanning, language }) {
         <span style={{ fontSize: '0.65rem', color: 'rgba(205,214,244,0.5)', marginLeft: '0.5rem', fontWeight: '600' }}>
           {language?.toUpperCase() || 'AUTO'} • EDITOR
         </span>
+        <button
+          onClick={() => onChange('')}
+          disabled={scanning || !code}
+          style={{
+            marginLeft: 'auto',
+            background: 'rgba(255, 95, 87, 0.1)',
+            border: '1px solid rgba(255, 95, 87, 0.2)',
+            borderRadius: '4px',
+            padding: '2px 8px',
+            color: '#ff5f57',
+            fontSize: '0.55rem',
+            fontWeight: '800',
+            cursor: scanning || !code ? 'not-allowed' : 'pointer',
+            opacity: scanning || !code ? 0.3 : 1,
+            transition: 'all 0.2s ease',
+            letterSpacing: '1px'
+          }}
+          onMouseEnter={(e) => { if(!scanning && code) e.target.style.background = 'rgba(255, 95, 87, 0.2)'; }}
+          onMouseLeave={(e) => { if(!scanning && code) e.target.style.background = 'rgba(255, 95, 87, 0.1)'; }}
+        >
+          CLEAR
+        </button>
       </div>
 
       {/* Code area */}
