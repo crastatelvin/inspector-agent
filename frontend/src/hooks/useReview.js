@@ -98,6 +98,26 @@ export default function useReview() {
     }
   }, [code, language, reviewing, clientId]);
 
+  const applyFix = useCallback((issue) => {
+    if (!issue.fix) return;
+    
+    // Simple line replacement if line number is available
+    if (issue.line > 0) {
+        const lines = code.split('\n');
+        const lineIdx = issue.line - 1;
+        if (lineIdx < lines.length) {
+            // We replace the line. Note: if the fix is multi-line, 
+            // this will still work correctly by joining back with \n
+            lines[lineIdx] = issue.fix;
+            setCode(lines.join('\n'));
+        }
+    } else {
+        // Fallback: If no line number, we can't reliably replace. 
+        // For now, we'll just log it.
+        console.warn("Cannot apply fix: No line number provided.");
+    }
+  }, [code]);
+
   const filteredIssues = result?.issues?.filter(issue => {
     if (activeFilter === 'all') return true;
     return issue.severity === activeFilter || issue.category === activeFilter;
@@ -107,6 +127,6 @@ export default function useReview() {
     code, setCode, language, setLanguage,
     reviewing, scanning, result, wsLog, error,
     activeFilter, setActiveFilter,
-    filteredIssues, runReview
+    filteredIssues, runReview, applyFix
   };
 }

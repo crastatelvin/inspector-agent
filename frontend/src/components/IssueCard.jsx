@@ -106,6 +106,30 @@ export default function IssueCard({ issue, index, onApplyFix }) {
                             PROPOSED FIX
                         </div>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            {issue.fix && (
+                                <button 
+                                    onClick={(e) => { e.stopPropagation(); onApplyFix(issue); }}
+                                    style={{ 
+                                        background: 'rgba(57,255,20,0.1)', 
+                                        border: '1px solid rgba(57,255,20,0.2)', 
+                                        color: '#39ff14', 
+                                        borderRadius: '4px',
+                                        padding: '2px 8px',
+                                        fontSize: '0.55rem',
+                                        fontWeight: '800',
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        gap: '0.3rem',
+                                        transition: 'all 0.2s ease'
+                                    }}
+                                    onMouseEnter={(e) => e.target.style.background = 'rgba(57,255,20,0.2)'}
+                                    onMouseLeave={(e) => e.target.style.background = 'rgba(57,255,20,0.1)'}
+                                >
+                                    <Sparkles size={10} />
+                                    <span>APPLY FIX</span>
+                                </button>
+                            )}
                             <button 
                                 onClick={copyToClipboard}
                                 style={{ background: 'transparent', border: 'none', color: 'rgba(205,214,244,0.4)', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}

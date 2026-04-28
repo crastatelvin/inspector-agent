@@ -13,7 +13,7 @@ export default function ReviewPage() {
     code, setCode, language, setLanguage,
     reviewing, scanning, result, wsLog, error,
     activeFilter, setActiveFilter,
-    filteredIssues, runReview
+    filteredIssues, runReview, applyFix
   } = useReview();
 
   const latestLog = wsLog[wsLog.length - 1];
@@ -188,7 +188,7 @@ export default function ReviewPage() {
                     {filteredIssues.length} DETECTED ISSUES
                     </div>
                     {filteredIssues.map((issue, i) => (
-                    <IssueCard key={`${issue.title}-${i}`} issue={issue} index={i} />
+                    <IssueCard key={`${issue.title}-${i}`} issue={issue} index={i} onApplyFix={applyFix} />
                     ))}
                 </motion.div>
                 ) : result ? (
