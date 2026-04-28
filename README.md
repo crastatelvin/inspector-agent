@@ -60,7 +60,7 @@ Users can:
 
 <div align="center">
 
-### 0) Demo Reel (Live Flow)
+###    Demo Reel (Live Flow)
 ![Demo](https://raw.githubusercontent.com/crastatelvin/inspector-agent/main/docs/screenshots/demo.webp)
 
 <br/>
