@@ -12,6 +12,7 @@ import uuid
 
 from code_analyzer import detect_language, get_code_metrics, LANGUAGE_PATTERNS
 from review_agent import review_code
+from nvidia_service import chat_with_inspector
 
 app = FastAPI(title="INSPECTOR — AI Code Review Agent")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
@@ -89,6 +90,22 @@ async def review(client_id: str, body: dict):
         return JSONResponse(result)
     except Exception as e:
         await broadcast_fn({"event": "error", "message": str(e)})
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.post("/chat/{client_id}")
+async def chat(client_id: str, body: dict):
+    code = body.get("code", "")
+    language = body.get("language", "python")
+    history = body.get("history", [])
+    message = body.get("message", "")
+
+    if not message:
+        return JSONResponse(status_code=400, content={"error": "Message required"})
+
+    try:
+        response = chat_with_inspector(code, language, history, message)
+        return {"response": response}
+    except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 if __name__ == "__main__":

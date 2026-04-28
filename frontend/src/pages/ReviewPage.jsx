@@ -1,11 +1,12 @@
 // Author: Telvin Crasta | MIT
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Terminal, AlertCircle } from 'lucide-react';
+import { Search, Terminal, AlertCircle, MessageSquare } from 'lucide-react';
 import CodeEditor from '../components/CodeEditor';
 import IssueCard from '../components/IssueCard';
 import ReviewSummary from '../components/ReviewSummary';
 import IssueFilter from '../components/IssueFilter';
 import LanguageBadge from '../components/LanguageBadge';
+import ChatPanel from '../components/ChatPanel';
 import useReview from '../hooks/useReview';
 
 export default function ReviewPage() {
@@ -13,7 +14,8 @@ export default function ReviewPage() {
     code, setCode, language, setLanguage,
     reviewing, scanning, result, wsLog, error,
     activeFilter, setActiveFilter,
-    filteredIssues, runReview, applyFix
+    filteredIssues, runReview, applyFix,
+    chatHistory, chatOpen, setChatOpen, sendMessage, isChatSending
   } = useReview();
 
   const latestLog = wsLog[wsLog.length - 1];
@@ -126,6 +128,33 @@ export default function ReviewPage() {
                 <><Search size={14} /> REVIEW CODE</>
             )}
           </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.05, background: 'rgba(0,170,255,0.15)' }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setChatOpen(!chatOpen)}
+            style={{
+              background: 'rgba(0,170,255,0.08)',
+              border: '1px solid rgba(0,170,255,0.2)',
+              borderRadius: '50%',
+              width: '38px',
+              height: '38px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#0af',
+              cursor: 'pointer',
+              position: 'relative'
+            }}
+          >
+            <MessageSquare size={18} />
+            {chatHistory.length > 0 && !chatOpen && (
+                <span style={{ 
+                    position: 'absolute', top: -2, right: -2, width: '10px', height: '10px', 
+                    background: '#39ff14', borderRadius: '50%', boxShadow: '0 0 10px #39ff14' 
+                }} />
+            )}
+          </motion.button>
         </div>
       </header>
 
@@ -217,6 +246,16 @@ export default function ReviewPage() {
           </div>
         </div>
       </main>
+
+      <ChatPanel 
+        isOpen={chatOpen} 
+        onClose={() => setChatOpen(false)}
+        history={chatHistory}
+        onSendMessage={sendMessage}
+        isSending={isChatSending}
+        code={code}
+        language={result?.language || language}
+      />
 
       {/* Footer */}
       <footer style={{ padding: '0.5rem 1.5rem', textAlign: 'center',

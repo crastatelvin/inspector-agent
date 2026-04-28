@@ -98,6 +98,35 @@ export default function useReview() {
     }
   }, [code, language, reviewing, clientId]);
 
+  const [chatHistory, setChatHistory] = useState([]);
+  const [chatOpen, setChatOpen] = useState(false);
+  const [isChatSending, setIsChatSending] = useState(false);
+
+  const sendMessage = useCallback(async (message) => {
+    if (!message.trim() || isChatSending) return;
+
+    const newUserMsg = { role: 'user', content: message };
+    setChatHistory(prev => [...prev, newUserMsg]);
+    setIsChatSending(true);
+
+    try {
+      const response = await axios.post(`${BASE_URL}/chat/${clientId}`, {
+        code,
+        language,
+        history: chatHistory,
+        message
+      });
+
+      const assistantMsg = { role: 'assistant', content: response.data.response };
+      setChatHistory(prev => [...prev, assistantMsg]);
+    } catch (err) {
+      console.error("Chat failed", err);
+      setChatHistory(prev => [...prev, { role: 'assistant', content: "[ERROR] Failed to connect to Inspector Core." }]);
+    } finally {
+      setIsChatSending(false);
+    }
+  }, [code, language, chatHistory, clientId, isChatSending]);
+
   const applyFix = useCallback((issue) => {
     if (!issue.fix) return;
     
@@ -127,6 +156,7 @@ export default function useReview() {
     code, setCode, language, setLanguage,
     reviewing, scanning, result, wsLog, error,
     activeFilter, setActiveFilter,
-    filteredIssues, runReview, applyFix
+    filteredIssues, runReview, applyFix,
+    chatHistory, chatOpen, setChatOpen, sendMessage, isChatSending
   };
 }

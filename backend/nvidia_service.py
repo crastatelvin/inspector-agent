@@ -38,3 +38,36 @@ def call_nvidia(prompt: str) -> str:
         return completion.choices[0].message.content.strip()
     except Exception as e:
         return f"[ERROR] {str(e)}"
+def chat_with_inspector(code: str, language: str, history: list, message: str) -> str:
+    if not client:
+        return "[ERROR] NVIDIA_API_KEY not configured."
+    
+    system_prompt = f"""You are 'INSPECTOR', an advanced AI Code Reviewer.
+    You are helping a developer with their {language} code.
+    
+    CURRENT CODE CONTEXT:
+    ```{language}
+    {code[:4000]}
+    ```
+    
+    Be concise, professional, and slightly futuristic. Focus on providing deep technical insights."""
+
+    messages = [{"role": "system", "content": system_prompt}]
+    
+    # Add history (limit to last 10 messages for context)
+    for msg in history[-10:]:
+        messages.append({"role": msg["role"], "content": msg["content"]})
+    
+    # Add new message
+    messages.append({"role": "user", "content": message})
+
+    try:
+        completion = client.chat.completions.create(
+            model="meta/llama-3.1-405b-instruct",
+            messages=messages,
+            temperature=0.5,
+            max_tokens=1024,
+        )
+        return completion.choices[0].message.content.strip()
+    except Exception as e:
+        return f"[ERROR] {str(e)}"
